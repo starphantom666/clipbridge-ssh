@@ -1,0 +1,17 @@
+{
+	"upload.success": "图片已上传：{0}",
+	"upload.error": "上传错误：{0}",
+	"upload.noImage": "剪贴板中未找到图片",
+	"upload.noRemote": "未检测到远程连接。请使用 Remote-SSH 连接到服务器。",
+	"upload.noEditor": "没有可用的活动编辑器",
+	"upload.noTerminal": "没有可用的活动终端",
+	"upload.noWorkspace": "没有可用的工作区文件夹。请在 VS Code 中打开一个文件夹。",
+	"upload.clipboardFailed": "无法访问剪贴板",
+	"upload.uploadFailed": "图片上传失败",
+	"upload.insertFailed": "无法将图片路径插入到 {0}",
+	"progress.checking": "检查剪贴板...",
+	"progress.uploading": "上传图片到服务器...",
+	"progress.preparing": "准备中...",
+	"progress.inserting": "插入路径...",
+	"progress.cleaning": "清理中..."
+}

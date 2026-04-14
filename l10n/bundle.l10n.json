@@ -1,0 +1,17 @@
+{
+	"upload.success": "Image uploaded: {0}",
+	"upload.error": "Upload error: {0}",
+	"upload.noImage": "No image found in clipboard",
+	"upload.noRemote": "No remote connection detected. Please connect to a server using Remote-SSH.",
+	"upload.noEditor": "No active editor available",
+	"upload.noTerminal": "No active terminal available",
+	"upload.noWorkspace": "No workspace folder available. Please open a folder in VS Code.",
+	"upload.clipboardFailed": "Failed to access clipboard",
+	"upload.uploadFailed": "Failed to upload image",
+	"upload.insertFailed": "Failed to insert image URL into {0}",
+	"progress.checking": "Checking clipboard...",
+	"progress.uploading": "Uploading image to server...",
+	"progress.preparing": "Preparing...",
+	"progress.inserting": "Inserting path...",
+	"progress.cleaning": "Cleaning up..."
+}

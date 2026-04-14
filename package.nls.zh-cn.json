@@ -1,0 +1,31 @@
+{
+	"displayName": "远程终端图片粘贴",
+	"description": "通过 SSH 将剪贴板图片粘贴到远程终端。支持任何终端类 AI 工具。",
+	
+	"command.upload.editor.title": "从剪贴板上传图片（编辑器）",
+	"command.upload.terminal.title": "从剪贴板上传图片（终端）",
+	
+	"config.title": "远程终端图片粘贴",
+	
+	"config.keybinding.description": "上传剪贴板图片的快捷键",
+	"config.keybinding.enum.ctrlAltV": "Ctrl+Alt+V（默认）",
+	"config.keybinding.enum.ctrlShiftV": "Ctrl+Shift+V",
+	"config.keybinding.enum.altV": "Alt+V",
+	"config.keybinding.enum.ctrlV": "Ctrl+V（可能与正常粘贴冲突）",
+	"config.keybinding.enum.f12": "F12",
+	
+	"config.retentionDays.description": "上传图片保留天数，超过自动清理（0 = 永不删除）",
+	
+	"config.clearClipboardAfterUpload.description": "上传成功后清空剪贴板",
+	
+	"config.quoteStyle.description": "粘贴时的路径引号风格",
+	"config.quoteStyle.enum.none": "无引号（默认）",
+	"config.quoteStyle.enum.single": "单引号：'path/to/file'",
+	"config.quoteStyle.enum.double": "双引号：\"path/to/file\"",
+	
+	"config.useForwardSlashes.description": "路径使用正斜杠（/），推荐用于跨平台兼容",
+	
+	"config.simulateRealPaste.description": "使用 bracketed paste 序列模拟真实粘贴事件。这会触发终端工具的粘贴处理器（如 OpenCode 的路径转图片检测）。启用后粘贴的路径会被识别为图片。",
+	
+	"config.showNotification.description": "上传图片后显示通知。关闭以获得沉浸式体验。"
+}

@@ -1,0 +1,31 @@
+{
+	"displayName": "Remote Terminal Image Paste",
+	"description": "Paste clipboard images to remote terminal via SSH. Works with any terminal-based AI tool.",
+	
+	"command.upload.editor.title": "Upload Image from Clipboard (Editor)",
+	"command.upload.terminal.title": "Upload Image from Clipboard (Terminal)",
+	
+	"config.title": "Remote Terminal Image Paste",
+	
+	"config.keybinding.description": "Keyboard shortcut for uploading images from clipboard",
+	"config.keybinding.enum.ctrlAltV": "Ctrl+Alt+V (default)",
+	"config.keybinding.enum.ctrlShiftV": "Ctrl+Shift+V",
+	"config.keybinding.enum.altV": "Alt+V",
+	"config.keybinding.enum.ctrlV": "Ctrl+V (may conflict with normal paste)",
+	"config.keybinding.enum.f12": "F12",
+	
+	"config.retentionDays.description": "Days to keep uploaded images before auto-cleanup (0 = never delete)",
+	
+	"config.clearClipboardAfterUpload.description": "Clear clipboard after successfully uploading an image",
+	
+	"config.quoteStyle.description": "Quote style for file path when pasting",
+	"config.quoteStyle.enum.none": "No quotes (default)",
+	"config.quoteStyle.enum.single": "Single quotes: 'path/to/file'",
+	"config.quoteStyle.enum.double": "Double quotes: \"path/to/file\"",
+	
+	"config.useForwardSlashes.description": "Use forward slashes (/) in path (recommended for cross-platform compatibility)",
+	
+	"config.simulateRealPaste.description": "Simulate real paste event using bracketed paste sequences. This triggers terminal tools' paste handlers (e.g., OpenCode's path-to-image detection). Enable if you want the pasted path to be recognized as an image by terminal-based AI tools.",
+	
+	"config.showNotification.description": "Show notification after uploading image. Disable for immersive experience."
+}

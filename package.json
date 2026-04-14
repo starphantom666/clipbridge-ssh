@@ -1,0 +1,161 @@
+{
+	"name": "remote-terminal-image-paste",
+	"displayName": "%displayName%",
+	"description": "%description%",
+	"version": "1.1.0",
+	"publisher": "local",
+	"author": "zhangyu",
+	"license": "MIT",
+	"icon": "icon.png",
+	"galleryBanner": {
+		"color": "#1e1e1e",
+		"theme": "dark"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dkodr/claudeboard"
+	},
+	"bugs": {
+		"url": "https://github.com/dkodr/claudeboard/issues"
+	},
+	"homepage": "https://github.com/dkodr/claudeboard#readme",
+	"engines": {
+		"vscode": "^1.74.0"
+	},
+	"categories": [
+		"Other",
+		"Snippets",
+		"Formatters"
+	],
+	"keywords": [
+		"image",
+		"upload",
+		"clipboard",
+		"paste",
+		"remote-ssh",
+		"server",
+		"screenshot",
+		"png",
+		"productivity",
+		"workflow",
+		"development",
+		"remote",
+		"ssh",
+		"file",
+		"path",
+		"terminal",
+		"ai"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./out/extension.js",
+	"l10n": "./l10n",
+	"extensionKind": [
+		"ui"
+	],
+	"contributes": {
+		"commands": [
+			{
+				"command": "imageUploader.uploadFromClipboard.editor",
+				"title": "%command.upload.editor.title%"
+			},
+			{
+				"command": "imageUploader.uploadFromClipboard.terminal",
+				"title": "%command.upload.terminal.title%"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "imageUploader.uploadFromClipboard.editor",
+				"key": "ctrl+alt+v",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "imageUploader.uploadFromClipboard.terminal",
+				"key": "ctrl+alt+v",
+				"when": "terminalFocus"
+			}
+		],
+		"configuration": {
+			"title": "%config.title%",
+			"properties": {
+				"imageUploader.keybinding": {
+					"type": "string",
+					"default": "ctrl+alt+v",
+					"description": "%config.keybinding.description%",
+					"enum": [
+						"ctrl+alt+v",
+						"ctrl+shift+v",
+						"alt+v",
+						"ctrl+v",
+						"f12"
+					],
+					"enumDescriptions": [
+						"%config.keybinding.enum.ctrlAltV%",
+						"%config.keybinding.enum.ctrlShiftV%",
+						"%config.keybinding.enum.altV%",
+						"%config.keybinding.enum.ctrlV%",
+						"%config.keybinding.enum.f12%"
+					]
+				},
+				"imageUploader.retentionDays": {
+					"type": "number",
+					"default": 30,
+					"minimum": 0,
+					"maximum": 365,
+					"description": "%config.retentionDays.description%"
+				},
+				"imageUploader.clearClipboardAfterUpload": {
+					"type": "boolean",
+					"default": false,
+					"description": "%config.clearClipboardAfterUpload.description%"
+				},
+				"imageUploader.quoteStyle": {
+					"type": "string",
+					"default": "none",
+					"description": "%config.quoteStyle.description%",
+					"enum": [
+						"none",
+						"single",
+						"double"
+					],
+					"enumDescriptions": [
+						"%config.quoteStyle.enum.none%",
+						"%config.quoteStyle.enum.single%",
+						"%config.quoteStyle.enum.double%"
+					]
+				},
+				"imageUploader.useForwardSlashes": {
+					"type": "boolean",
+					"default": true,
+					"description": "%config.useForwardSlashes.description%"
+				},
+				"imageUploader.simulateRealPaste": {
+					"type": "boolean",
+					"default": false,
+					"description": "%config.simulateRealPaste.description%"
+				},
+				"imageUploader.showNotification": {
+					"type": "boolean",
+					"default": true,
+					"description": "%config.showNotification.description%"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"clean": "rm -rf out",
+		"package": "vsce package",
+		"install-package": "code --install-extension *.vsix"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.74.0",
+		"@types/node": "^20.0.0",
+		"typescript": "^5.0.0"
+	},
+	"dependencies": {}
+}
