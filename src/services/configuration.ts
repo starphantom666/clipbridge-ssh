@@ -119,7 +119,7 @@ class VSCodeConfigurationService implements ConfigurationService {
     }
 
     private validateRetentionDays(value: any): number {
-        if (typeof value === 'number' && value > 0 && value <= 365) {
+        if (typeof value === 'number' && value >= 0 && value <= 365) {
             return Math.floor(value);
         }
         
@@ -155,7 +155,7 @@ export class ConfigValidator {
     }
 
     static isValidRetentionDays(value: number): boolean {
-        return Number.isInteger(value) && value > 0 && value <= 365;
+        return Number.isInteger(value) && value >= 0 && value <= 365;
     }
 
     static isValidTimeout(value: number): boolean {

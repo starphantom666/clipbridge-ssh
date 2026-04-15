@@ -13,12 +13,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/dkodr/claudeboard"
+		"url": "https://github.com/starphantom666/-remote-terminal-image-paste"
 	},
 	"bugs": {
-		"url": "https://github.com/dkodr/claudeboard/issues"
+		"url": "https://github.com/starphantom666/-remote-terminal-image-paste/issues"
 	},
-	"homepage": "https://github.com/dkodr/claudeboard#readme",
+	"homepage": "https://github.com/starphantom666/-remote-terminal-image-paste#readme",
 	"engines": {
 		"vscode": "^1.74.0"
 	},

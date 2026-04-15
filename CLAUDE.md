@@ -1,99 +1,98 @@
-# Claudeboard - VS Code Extension
+# Remote Terminal Image Paste - VS Code Extension
+
+> An improved version based on [Claudeboard](https://github.com/dkodr/claudeboard)
 
 ## Project Overview
-A VS Code extension that shares images with Claude Code running on remote servers via Remote-SSH. Upload clipboard images instantly and get shareable file paths for seamless Claude Code workflows.
+
+Upload clipboard images to remote servers via Remote-SSH and get shareable file paths. Designed for general remote development workflows.
+
+## Original Source
+
+This project is forked from [Claudeboard](https://github.com/dkodr/claudeboard), original author [dkodr](https://github.com/dkodr).
+
+Improvements:
+- Fixed notification suppression not working
+- Progress indicator moved to status bar
+- Added quote style, path slash, and simulated paste configuration
 
 ## Tech Stack
-- **Language:** TypeScript (strict mode)
-- **Framework:** VS Code Extension API
-- **Dependencies:** @types/vscode, @types/node, typescript
-- **Build:** TypeScript compiler
-- **Package:** vsce (Visual Studio Code Extension)
-- **Architecture:** Service-based with dependency injection
+
+- **Language**: TypeScript (strict mode)
+- **Framework**: VS Code Extension API
+- **Dependencies**: @types/vscode, @types/node, typescript
+- **Build**: TypeScript compiler
+- **Package**: vsce (Visual Studio Code Extension)
+- **Architecture**: Service architecture + Dependency injection
 
 ## Development Commands
 
 ### Build & Development
 ```bash
-npm run compile      # Compile TypeScript to JavaScript
-npm run watch        # Watch for changes and auto-compile
-npm run clean        # Remove compiled output
+npm run compile      # Compile TypeScript
+npm run watch        # Watch mode auto-compile
+npm run clean        # Clean build output
 ```
 
-### Testing & Validation
-```bash
-# No automated tests currently configured
-# Manual testing: F5 in VS Code to launch Extension Development Host
-```
-
-### Packaging & Installation
+### Package & Install
 ```bash
 npm run package                    # Create VSIX package
-npm run install-package           # Install the generated VSIX
-code --install-extension *.vsix   # Alternative install method
+npm run install-package           # Install generated VSIX
+code --install-extension *.vsix   # Install method
 ```
 
-## Release Workflow
+## Configuration Options
 
-### Version Management
-```bash
-# Update version in package.json and create git tag
-npm version patch    # For bug fixes (1.0.0 → 1.0.1)
-npm version minor    # For new features (1.0.0 → 1.1.0)
-npm version major    # For breaking changes (1.0.0 → 2.0.0)
-```
-
-### Git Workflow
-```bash
-# Daily development cycle
-git status
-git add .
-git commit -m "feat: Add new feature"
-git push origin main
-
-# Release process
-npm version patch              # Updates package.json and creates git tag
-git push origin main          # Push commits
-git push --tags              # Push tags
-npm run package             # Create VSIX file
-```
-
-## Key Features
-- **Cross-platform clipboard support:** Windows, Linux, macOS with enhanced macOS compatibility
-- **Robust macOS clipboard detection:** Multi-strategy approach (AppleScript + pbpaste fallback)
-- **Multiple image format support:** PNG, TIFF, JPEG with automatic format conversion
-- **Remote-SSH integration:** Seamless uploads to remote servers
-- **Configurable keybinding:** Choose from multiple keyboard shortcuts
-- **Auto-cleanup:** Configurable retention period (0-365 days)
-- **Dual context:** Works in both editor and terminal
-- **Progress indicators:** Real-time upload feedback
-- **Secure by design:** Uses existing SSH connections
-
-## Configuration
-The extension provides these settings:
-- `imageUploader.keybinding`: Keyboard shortcut (ctrl+alt+v, ctrl+shift+v, alt+v, ctrl+v, f12)
-- `imageUploader.retentionDays`: Image retention period (0-365 days, 0=never delete)
+| Setting | Type | Default | Description |
+|---------|------|---------|-------------|
+| `keybinding` | string | `ctrl+alt+v` | Keyboard shortcut |
+| `retentionDays` | number | `30` | Retention days (0-365) |
+| `clearClipboardAfterUpload` | boolean | `false` | Clear clipboard after upload |
+| `quoteStyle` | string | `none` | Quote style (none/single/double) |
+| `useForwardSlashes` | boolean | `true` | Use forward slashes |
+| `simulateRealPaste` | boolean | `false` | Simulate real paste |
+| `showNotification` | boolean | `true` | Show notifications |
 
 ## Commands
-- `imageUploader.uploadFromClipboard.editor`: Upload from clipboard (editor)
-- `imageUploader.uploadFromClipboard.terminal`: Upload from clipboard (terminal)
+
+- `imageUploader.uploadFromClipboard.editor` - Upload in editor
+- `imageUploader.uploadFromClipboard.terminal` - Upload in terminal
 
 ## Extension Requirements
+
 - VS Code version: ^1.74.0
-- Extension kind: UI (runs in main VS Code process)
-- Activation: On startup (all contexts)
+- Extension type: UI (runs in main process)
+- Activation: On startup
 
 ## Architecture
-- **Service-based design:** ClipboardService, FileManagerService, ProgressService, ConfigurationService
-- **Cross-platform abstractions:** Platform-specific clipboard implementations with enhanced macOS support
-- **Multi-strategy clipboard access:** AppleScript (primary) with pbpaste fallback for maximum compatibility
-- **Format conversion:** Automatic TIFF/JPEG to PNG conversion using native macOS tools
-- **Type safety:** TypeScript strict mode with Result<T,E> pattern
-- **Resource management:** RAII pattern for guaranteed cleanup
-- **Command pattern:** Decoupled business logic with dependency injection
+
+### Service Layer
+- **ClipboardService** - Cross-platform clipboard access
+- **FileManagerService** - File management and cleanup
+- **ProgressService** - Progress indicator (status bar)
+- **ConfigurationService** - Configuration management
+
+### Design Patterns
+- **Result<T,E>** - Type-safe error handling
+- **RAII** - Automatic resource cleanup
+- **Command Pattern** - Decoupled business logic
+- **Dependency Injection** - Service injection
+
+## Main Features
+
+- Cross-platform clipboard support (Windows/Linux/macOS)
+- Multi-strategy macOS clipboard access (AppleScript + pbpaste)
+- Multiple format support (PNG/TIFF/JPEG auto conversion)
+- Remote-SSH seamless integration
+- Configurable keybinding and cleanup policy
+- Editor and terminal dual context support
+- Status bar progress indicator (no popup)
+- Notifications fully suppressible
+- Quote and slash style configurable
+- Bracketed Paste support
 
 ## Notes
+
 - No automated testing configured
-- Manual workflow preferred over GitHub Actions
-- Solo development project
-- Designed specifically for Claude Code workflows
+- Manual workflow preferred
+- Personal project based on Claudeboard improvements
+- Optimized for general remote development workflows
