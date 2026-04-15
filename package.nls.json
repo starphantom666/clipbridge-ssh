@@ -29,5 +29,13 @@
 	
 	"config.compositePasteFormat.description": "When Simulate Real Paste is enabled, also paste a plain text path wrapped in brackets. Result: [image visual] [/path/to/image.png]. This allows language models to read the image via explicit path (using look_at tool), even without visual capabilities.",
 	
-	"config.showNotification.description": "Show notification after uploading image. Disable for immersive experience."
+	"config.showNotification.description": "Show notification after uploading image. Disable for immersive experience.",
+	
+	"config.maxFileSizeMb.description": "Maximum clipboard image size in MB before upload is blocked (default: 20)",
+	
+	"config.insertTemplate.description": "Template inserted into terminal after image upload. Supported tokens: {path}, {quotedPath}, {workspaceRelativePath}, {fileName}. Use @{path} for Claude Code format.",
+	
+	"config.maxFiles.description": "Keep at most this many newest images in the directory (0 = disable count-based cleanup)",
+	
+	"config.fileNameTemplate.description": "File name template for saved images. Supported tokens: {timestamp}, {date}, {time}, {random}"
 }

@@ -201,6 +201,14 @@ class OptimizedImageUploadCommand implements UploadImageCommand {
                 return failure(new ClipboardError(vscode.l10n.t('upload.noImage')));
             }
 
+            const maxSizeMb = this.deps.config.getMaxFileSizeMb();
+            const sizeMb = imageData.buffer.length / (1024 * 1024);
+            if (sizeMb > maxSizeMb) {
+                return failure(new ClipboardError(
+                    vscode.l10n.t('upload.fileTooLarge', maxSizeMb, Math.round(sizeMb))
+                ));
+            }
+
             return success(imageData);
         } catch (error) {
             return failure(new ClipboardError(
@@ -218,22 +226,34 @@ class OptimizedImageUploadCommand implements UploadImageCommand {
         try {
             reporter.report(ProgressSteps.preparing());
 
-            // Cleanup old images first based on user configuration
             const retentionDays = this.deps.config.getRetentionDays();
-            await this.deps.fileManager.cleanupOldImages(retentionDays);
+            const maxFiles = this.deps.config.getMaxFiles();
+            await this.deps.fileManager.cleanupOldImages(retentionDays, maxFiles);
 
             reporter.report(ProgressSteps.uploading());
 
-            // Create image file
+            const fileNameTemplate = this.deps.config.getFileNameTemplate();
             const imageFile = await this.deps.fileManager.createImageFile(
                 imageData.buffer,
-                imageData.format
+                imageData.format,
+                fileNameTemplate
             );
 
             reporter.report(ProgressSteps.inserting());
 
-            // Insert URL into editor/terminal
-            const insertResult = await this.insertImageUrl(imageFile.getPath(), destination);
+            const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+            const workspacePath = workspaceFolder?.uri.fsPath || '';
+            const fileName = imageFile.getUri().path.split('/').pop() || '';
+            
+            const insertTemplate = this.deps.config.getInsertTemplate();
+            const customPath = this.formatInsertTemplate(
+                insertTemplate,
+                imageFile.getPath(),
+                workspacePath,
+                fileName
+            );
+            
+            const insertResult = await this.insertImageUrl(customPath, destination);
             if (Result.isFailure(insertResult)) {
                 imageFile.dispose();
                 return insertResult;
@@ -241,7 +261,6 @@ class OptimizedImageUploadCommand implements UploadImageCommand {
 
             reporter.report(ProgressSteps.cleaning());
 
-            // Clear clipboard if configured to do so
             if (this.deps.config.getClearClipboardAfterUpload()) {
                 await this.deps.clipboard.clear();
             }
@@ -262,22 +281,40 @@ class OptimizedImageUploadCommand implements UploadImageCommand {
         }
     }
 
+    private formatInsertTemplate(
+        template: string,
+        path: string,
+        workspacePath: string,
+        fileName: string
+    ): string {
+        const useForwardSlashes = this.deps.config.getUseForwardSlashes();
+        const processedPath = useForwardSlashes ? path.replace(/\\/g, '/') : path;
+        const relativePath = workspacePath 
+            ? processedPath.replace(workspacePath.replace(/\\/g, '/'), '').replace(/^\/?/, '/')
+            : processedPath;
+
+        let result = template
+            .replace('{path}', processedPath)
+            .replace('{quotedPath}', `"${processedPath}"`)
+            .replace('{workspaceRelativePath}', relativePath)
+            .replace('{fileName}', fileName);
+
+        if (template === '{path}' || template === '{workspaceRelativePath}') {
+            const quoteStyle = this.deps.config.getQuoteStyle();
+            if (quoteStyle === 'single') {
+                result = `'${result}'`;
+            } else if (quoteStyle === 'double') {
+                result = `"${result}"`;
+            }
+        }
+
+        return result;
+    }
+
     private async insertImageUrl(url: string, destination: InsertDestination): Promise<ExtensionResult<void>> {
         try {
-            const quoteStyle = this.deps.config.getQuoteStyle();
-            const useForwardSlashes = this.deps.config.getUseForwardSlashes();
             const simulateRealPaste = this.deps.config.getSimulateRealPaste();
             const compositePasteFormat = this.deps.config.getCompositePasteFormat();
-            
-            let processedUrl = useForwardSlashes 
-                ? url.replace(/\\/g, '/') 
-                : url;
-            
-            if (quoteStyle === 'single') {
-                processedUrl = `'${processedUrl}'`;
-            } else if (quoteStyle === 'double') {
-                processedUrl = `"${processedUrl}"`;
-            }
             
             if (destination === 'editor') {
                 const activeEditor = vscode.window.activeTextEditor;
@@ -287,8 +324,8 @@ class OptimizedImageUploadCommand implements UploadImageCommand {
 
                 const position = activeEditor.selection.active;
                 const insertText = compositePasteFormat && simulateRealPaste 
-                    ? `[${processedUrl}]` 
-                    : processedUrl;
+                    ? `[${url}]` 
+                    : url;
                     
                 await activeEditor.edit(editBuilder => {
                     editBuilder.insert(position, insertText);
@@ -300,11 +337,11 @@ class OptimizedImageUploadCommand implements UploadImageCommand {
                 }
                 
                 if (compositePasteFormat && simulateRealPaste) {
-                    await this.sendCompositePasteToTerminal(activeTerminal, processedUrl);
+                    await this.sendCompositePasteToTerminal(activeTerminal, url);
                 } else if (simulateRealPaste) {
-                    await this.sendBracketedPasteToTerminal(processedUrl);
+                    await this.sendBracketedPasteToTerminal(url);
                 } else {
-                    activeTerminal.sendText(processedUrl, false);
+                    activeTerminal.sendText(url, false);
                 }
             }
 

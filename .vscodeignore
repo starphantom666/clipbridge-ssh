@@ -9,6 +9,7 @@ tsconfig.json
 
 # Test images directory (created at runtime)
 .remote_terminal_images/**
+.clipbridge-images/**
 
 # Node development files
 node_modules/**

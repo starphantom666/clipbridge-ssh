@@ -26,6 +26,10 @@ export interface ConfigurationService {
     getSimulateRealPaste(): boolean;
     getCompositePasteFormat(): boolean;
     getShowNotification(): boolean;
+    getMaxFileSizeMb(): number;
+    getInsertTemplate(): string;
+    getMaxFiles(): number;
+    getFileNameTemplate(): string;
     onConfigurationChanged(callback: (config: ExtensionConfig) => void): vscode.Disposable;
 }
 
@@ -89,6 +93,34 @@ class VSCodeConfigurationService implements ConfigurationService {
     getShowNotification(): boolean {
         const config = vscode.workspace.getConfiguration(this.sectionName);
         return config.get<boolean>('showNotification', false);
+    }
+
+    getMaxFileSizeMb(): number {
+        const config = vscode.workspace.getConfiguration(this.sectionName);
+        const value = config.get<number>('maxFileSizeMb', 20);
+        if (typeof value === 'number' && value >= 1 && value <= 100) {
+            return Math.floor(value);
+        }
+        return 20;
+    }
+
+    getInsertTemplate(): string {
+        const config = vscode.workspace.getConfiguration(this.sectionName);
+        return config.get<string>('insertTemplate', '{path}');
+    }
+
+    getMaxFiles(): number {
+        const config = vscode.workspace.getConfiguration(this.sectionName);
+        const value = config.get<number>('maxFiles', 30);
+        if (typeof value === 'number' && value >= 0) {
+            return Math.floor(value);
+        }
+        return 30;
+    }
+
+    getFileNameTemplate(): string {
+        const config = vscode.workspace.getConfiguration(this.sectionName);
+        return config.get<string>('fileNameTemplate', 'image-{timestamp}.png');
     }
 
     getTimeouts(): TimeoutConfig {

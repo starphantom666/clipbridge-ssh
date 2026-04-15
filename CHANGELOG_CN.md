@@ -8,6 +8,17 @@
 
 ---
 
+## [1.1.0] - 2026-04-15
+
+### 新增功能
+
+- **文件大小限制** - `maxFileSizeMb` 配置，超过限制阻止上传（默认：20MB）
+- **插入模板** - `insertTemplate` 配置，支持 `{path}`、`{quotedPath}`、`{workspaceRelativePath}`、`{fileName}` 模板
+- **按数量清理** - `maxFiles` 配置，只保留最新 N 张图片（默认：30）
+- **文件名模板** - `fileNameTemplate` 配置，支持 `{timestamp}`、`{date}`、`{time}`、`{random}` 模板
+
+---
+
 ## [1.0.2] - 2026-04-15
 
 ### 变更

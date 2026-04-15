@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [1.1.0] - 2026-04-15
+
+### Added
+
+- **File size limit** - `maxFileSizeMb` config to block uploads exceeding size limit (default: 20MB)
+- **Insert template** - `insertTemplate` config with `{path}`, `{quotedPath}`, `{workspaceRelativePath}`, `{fileName}` tokens
+- **Count-based cleanup** - `maxFiles` config to keep only newest N images (default: 30)
+- **File name template** - `fileNameTemplate` config with `{timestamp}`, `{date}`, `{time}`, `{random}` tokens
+
+---
+
 ## [1.0.2] - 2026-04-15
 
 ### Changed

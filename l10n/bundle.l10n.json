@@ -9,6 +9,7 @@
 	"upload.clipboardFailed": "Failed to access clipboard",
 	"upload.uploadFailed": "Failed to upload image",
 	"upload.insertFailed": "Failed to insert image URL into {0}",
+	"upload.fileTooLarge": "Image too large: {0}MB limit exceeded (size: {1}MB)",
 	"progress.checking": "Checking clipboard...",
 	"progress.uploading": "Uploading image to server...",
 	"progress.preparing": "Preparing...",

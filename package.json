@@ -2,7 +2,7 @@
 	"name": "clipbridge-ssh",
 	"displayName": "%displayName%",
 	"description": "%description%",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"publisher": "starphantom",
 	"author": "zhangyu",
 	"license": "MIT",
@@ -145,6 +145,29 @@
 					"type": "boolean",
 					"default": false,
 					"description": "%config.showNotification.description%"
+				},
+				"imageUploader.maxFileSizeMb": {
+					"type": "number",
+					"default": 20,
+					"minimum": 1,
+					"maximum": 100,
+					"description": "%config.maxFileSizeMb.description%"
+				},
+				"imageUploader.insertTemplate": {
+					"type": "string",
+					"default": "{path}",
+					"description": "%config.insertTemplate.description%"
+				},
+				"imageUploader.maxFiles": {
+					"type": "number",
+					"default": 30,
+					"minimum": 0,
+					"description": "%config.maxFiles.description%"
+				},
+				"imageUploader.fileNameTemplate": {
+					"type": "string",
+					"default": "image-{timestamp}.png",
+					"description": "%config.fileNameTemplate.description%"
 				}
 			}
 		}
