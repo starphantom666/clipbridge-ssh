@@ -1,0 +1,26 @@
+# Development source code (compiled to out/)
+src/**
+*.ts
+tsconfig.json
+
+# Development config
+.vscode/**
+.claude/**
+
+# Test images directory (created at runtime)
+.remote_terminal_images/**
+
+# Node development files
+node_modules/**
+*.map
+.gitignore
+.git/**
+
+# Unnecessary docs
+CLAUDE.md
+CHANGELOG_CN.md
+README_CN.md
+
+# Build artifacts
+*.vsix
+package-lock.json
