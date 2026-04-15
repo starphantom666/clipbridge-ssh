@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [1.0.1] - 2026-04-15
+
+### Fixed
+
+- **Path output missing directory** - `getPath()` now correctly returns full path including `.remote_terminal_images/` directory
+
+---
+
 ## [1.0.0] - 2026-04-15
 
 ### Added

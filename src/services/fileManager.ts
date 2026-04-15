@@ -24,9 +24,10 @@ class ManagedImageFile implements ImageFile {
     }
 
     getPath(): string {
-        // uri.path uses forward slashes (/) for all platforms
-        // uri.fsPath uses backslashes (\) on Windows, breaking remote paths
-        return this.uri.path;
+        // Use fsPath for local files, path for remote files
+        // fsPath provides platform-specific path with full directory structure
+        const path = this.uri.fsPath || this.uri.path;
+        return path;
     }
 
     async exists(): Promise<boolean> {
