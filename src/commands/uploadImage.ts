@@ -170,7 +170,9 @@ class OptimizedImageUploadCommand implements UploadImageCommand {
         );
 
         if (Result.isFailure(clipboardResult)) {
-            vscode.window.showWarningMessage(clipboardResult.error.message);
+            if (this.deps.config.getShowNotification()) {
+                vscode.window.showWarningMessage(clipboardResult.error.message);
+            }
             return clipboardResult;
         }
 
@@ -328,6 +330,8 @@ export async function handleUploadCommand(
     const result = await command.execute(destination);
 
     if (Result.isFailure(result)) {
-        vscode.window.showErrorMessage(vscode.l10n.t('upload.error', result.error.message));
+        if (deps.config.getShowNotification()) {
+            vscode.window.showErrorMessage(vscode.l10n.t('upload.error', result.error.message));
+        }
     }
 }

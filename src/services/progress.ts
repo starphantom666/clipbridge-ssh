@@ -45,7 +45,7 @@ export class NotificationProgressService implements ProgressService {
         task: (reporter: ProgressReporter) => Promise<T>
     ): Promise<T> {
         return vscode.window.withProgress({
-            location: vscode.ProgressLocation.Notification,
+            location: vscode.ProgressLocation.Window,
             title,
             cancellable: false
         }, async (progress) => {
