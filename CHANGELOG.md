@@ -64,4 +64,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
-[1.0.0]: https://github.com/starphantom666/-remote-terminal-image-paste/releases/tag/v1.0.0
+[1.0.0]: https://github.com/starphantom666/clipbridge-ssh/releases/tag/v1.0.0

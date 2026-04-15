@@ -13,12 +13,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/starphantom666/-remote-terminal-image-paste"
+		"url": "https://github.com/starphantom666/clipbridge-ssh"
 	},
 	"bugs": {
-		"url": "https://github.com/starphantom666/-remote-terminal-image-paste/issues"
+		"url": "https://github.com/starphantom666/clipbridge-ssh/issues"
 	},
-	"homepage": "https://github.com/starphantom666/-remote-terminal-image-paste#readme",
+	"homepage": "https://github.com/starphantom666/clipbridge-ssh#readme",
 	"engines": {
 		"vscode": "^1.74.0"
 	},

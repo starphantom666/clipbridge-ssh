@@ -193,7 +193,7 @@ workspace/
 
 ```bash
 # Clone repository
-git clone https://github.com/starphantom666/-remote-terminal-image-paste.git
+git clone https://github.com/starphantom666/clipbridge-ssh.git
 
 # Install dependencies
 npm install
@@ -226,7 +226,7 @@ MIT License
 ## 🔗 Links
 
 - **Original Project**: [Claudeboard](https://github.com/dkodr/claudeboard) by [dkodr](https://github.com/dkodr)
-- **This Project**: [ClipBridge SSH](https://github.com/starphantom666/-remote-terminal-image-paste)
+- **This Project**: [ClipBridge SSH](https://github.com/starphantom666/clipbridge-ssh)
 - **Remote-SSH Extension**: [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
 
 ---
