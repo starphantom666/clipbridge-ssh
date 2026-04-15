@@ -267,6 +267,7 @@ class OptimizedImageUploadCommand implements UploadImageCommand {
             const quoteStyle = this.deps.config.getQuoteStyle();
             const useForwardSlashes = this.deps.config.getUseForwardSlashes();
             const simulateRealPaste = this.deps.config.getSimulateRealPaste();
+            const compositePasteFormat = this.deps.config.getCompositePasteFormat();
             
             let processedUrl = useForwardSlashes 
                 ? url.replace(/\\/g, '/') 
@@ -285,8 +286,12 @@ class OptimizedImageUploadCommand implements UploadImageCommand {
                 }
 
                 const position = activeEditor.selection.active;
+                const insertText = compositePasteFormat && simulateRealPaste 
+                    ? `[${processedUrl}]` 
+                    : processedUrl;
+                    
                 await activeEditor.edit(editBuilder => {
-                    editBuilder.insert(position, processedUrl);
+                    editBuilder.insert(position, insertText);
                 });
             } else if (destination === 'terminal') {
                 const activeTerminal = vscode.window.activeTerminal;
@@ -294,13 +299,10 @@ class OptimizedImageUploadCommand implements UploadImageCommand {
                     return failure(new FileSystemError(vscode.l10n.t('upload.noTerminal')));
                 }
                 
-                if (simulateRealPaste) {
-                    const bracketedPasteStart = '\u001b[200~';
-                    const bracketedPasteEnd = '\u001b[201~';
-                    
-                    await vscode.commands.executeCommand('workbench.action.terminal.sendSequence', {
-                        text: `${bracketedPasteStart}${processedUrl}${bracketedPasteEnd}`
-                    });
+                if (compositePasteFormat && simulateRealPaste) {
+                    await this.sendCompositePasteToTerminal(activeTerminal, processedUrl);
+                } else if (simulateRealPaste) {
+                    await this.sendBracketedPasteToTerminal(processedUrl);
                 } else {
                     activeTerminal.sendText(processedUrl, false);
                 }
@@ -313,6 +315,28 @@ class OptimizedImageUploadCommand implements UploadImageCommand {
                 { originalError: error, destination, url }
             ));
         }
+    }
+    
+    private async sendCompositePasteToTerminal(terminal: vscode.Terminal, processedUrl: string): Promise<void> {
+        const BRACKETED_PASTE_START = '\u001b[200~';
+        const BRACKETED_PASTE_END = '\u001b[201~';
+        const SEQUENCE_DELAY_MS = 50;
+        
+        await vscode.commands.executeCommand('workbench.action.terminal.sendSequence', {
+            text: `${BRACKETED_PASTE_START}${processedUrl}${BRACKETED_PASTE_END}`
+        });
+        
+        await new Promise(resolve => setTimeout(resolve, SEQUENCE_DELAY_MS));
+        terminal.sendText(`[${processedUrl}]`, false);
+    }
+    
+    private async sendBracketedPasteToTerminal(processedUrl: string): Promise<void> {
+        const BRACKETED_PASTE_START = '\u001b[200~';
+        const BRACKETED_PASTE_END = '\u001b[201~';
+        
+        await vscode.commands.executeCommand('workbench.action.terminal.sendSequence', {
+            text: `${BRACKETED_PASTE_START}${processedUrl}${BRACKETED_PASTE_END}`
+        });
     }
 }
 

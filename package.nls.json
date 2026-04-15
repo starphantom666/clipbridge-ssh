@@ -27,5 +27,7 @@
 	
 	"config.simulateRealPaste.description": "Simulate real paste event using bracketed paste sequences. This triggers terminal tools' paste handlers (e.g., OpenCode's path-to-image detection). Enable if you want the pasted path to be recognized as an image by terminal-based AI tools.",
 	
+	"config.compositePasteFormat.description": "When Simulate Real Paste is enabled, also paste a plain text path wrapped in brackets. Result: [image visual] [/path/to/image.png]. This allows language models to read the image via explicit path (using look_at tool), even without visual capabilities.",
+	
 	"config.showNotification.description": "Show notification after uploading image. Disable for immersive experience."
 }

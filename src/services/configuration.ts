@@ -24,6 +24,7 @@ export interface ConfigurationService {
     getQuoteStyle(): QuoteStyle;
     getUseForwardSlashes(): boolean;
     getSimulateRealPaste(): boolean;
+    getCompositePasteFormat(): boolean;
     getShowNotification(): boolean;
     onConfigurationChanged(callback: (config: ExtensionConfig) => void): vscode.Disposable;
 }
@@ -80,9 +81,14 @@ class VSCodeConfigurationService implements ConfigurationService {
         return config.get<boolean>('simulateRealPaste', false);
     }
 
+    getCompositePasteFormat(): boolean {
+        const config = vscode.workspace.getConfiguration(this.sectionName);
+        return config.get<boolean>('compositePasteFormat', false);
+    }
+
     getShowNotification(): boolean {
         const config = vscode.workspace.getConfiguration(this.sectionName);
-        return config.get<boolean>('showNotification', true);
+        return config.get<boolean>('showNotification', false);
     }
 
     getTimeouts(): TimeoutConfig {

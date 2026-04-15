@@ -2,7 +2,7 @@
 	"name": "remote-terminal-image-paste",
 	"displayName": "%displayName%",
 	"description": "%description%",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"publisher": "local",
 	"author": "zhangyu",
 	"license": "MIT",
@@ -136,9 +136,14 @@
 					"default": false,
 					"description": "%config.simulateRealPaste.description%"
 				},
+				"imageUploader.compositePasteFormat": {
+					"type": "boolean",
+					"default": false,
+					"description": "%config.compositePasteFormat.description%"
+				},
 				"imageUploader.showNotification": {
 					"type": "boolean",
-					"default": true,
+					"default": false,
 					"description": "%config.showNotification.description%"
 				}
 			}
