@@ -1,4 +1,4 @@
-# Remote Terminal Image Paste
+# ClipBridge SSH
 
 > An improved version based on [Claudeboard](https://github.com/dkodr/claudeboard)
 
@@ -60,10 +60,10 @@ Improvements made in this version:
 ## 🌐 Upload Location
 
 ### Remote Server
-- **Location**: `.remote_terminal_images/` in workspace root
+- **Location**: `.clipbridge-images/` in workspace root
 - **Auto cleanup**: Images older than retention days are automatically deleted
 - **Git ignored**: Automatically creates `.gitignore` to exclude images
-- **Return path**: Full file path, e.g., `/workspace/.remote_terminal_images/image_1234567890.png`
+- **Return path**: Full file path, e.g., `/workspace/.clipbridge-images/image_1234567890.png`
 
 ---
 
@@ -180,7 +180,7 @@ code --install-extension *.vsix
 
 ```
 workspace/
-├── .remote_terminal_images/
+├── .clipbridge-images/
 │   ├── .gitignore          # Auto-created
 │   ├── image_1234567890.png
 │   └── image_1234567891.png
@@ -226,7 +226,7 @@ MIT License
 ## 🔗 Links
 
 - **Original Project**: [Claudeboard](https://github.com/dkodr/claudeboard) by [dkodr](https://github.com/dkodr)
-- **This Project**: [Remote Terminal Image Paste](https://github.com/starphantom666/-remote-terminal-image-paste)
+- **This Project**: [ClipBridge SSH](https://github.com/starphantom666/-remote-terminal-image-paste)
 - **Remote-SSH Extension**: [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
 
 ---

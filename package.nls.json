@@ -1,11 +1,11 @@
 {
-	"displayName": "Remote Terminal Image Paste",
+	"displayName": "ClipBridge SSH",
 	"description": "Paste clipboard images to remote terminal via SSH. Works with any terminal-based AI tool.",
 	
 	"command.upload.editor.title": "Upload Image from Clipboard (Editor)",
 	"command.upload.terminal.title": "Upload Image from Clipboard (Terminal)",
 	
-	"config.title": "Remote Terminal Image Paste",
+	"config.title": "ClipBridge SSH",
 	
 	"config.keybinding.description": "Keyboard shortcut for uploading images from clipboard",
 	"config.keybinding.enum.ctrlAltV": "Ctrl+Alt+V (default)",

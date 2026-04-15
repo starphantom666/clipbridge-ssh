@@ -1,4 +1,4 @@
-# Remote Terminal Image Paste
+# ClipBridge SSH
 
 > 基于 [Claudeboard](https://github.com/dkodr/claudeboard) 的改进版本
 
@@ -60,10 +60,10 @@
 ## 🌐 上传位置
 
 ### 远程服务器
-- **存放位置**：工作区根目录下的 `.remote_terminal_images/`
+- **存放位置**：工作区根目录下的 `.clipbridge-images/`
 - **自动清理**：超过设定天数的图片自动删除
 - **Git 忽略**：自动创建 `.gitignore`，排除图片提交
-- **返回路径**：完整文件路径，如 `/workspace/.remote_terminal_images/image_1234567890.png`
+- **返回路径**：完整文件路径，如 `/workspace/.clipbridge-images/image_1234567890.png`
 
 ---
 
@@ -180,7 +180,7 @@ code --install-extension *.vsix
 
 ```
 workspace/
-├── .remote_terminal_images/
+├── .clipbridge-images/
 │   ├── .gitignore          # 自动创建
 │   ├── image_1234567890.png
 │   └── image_1234567891.png
@@ -226,7 +226,7 @@ MIT License
 ## 🔗 相关链接
 
 - **原始项目**：[Claudeboard](https://github.com/dkodr/claudeboard) by [dkodr](https://github.com/dkodr)
-- **本项目**：[Remote Terminal Image Paste](https://github.com/starphantom666/-remote-terminal-image-paste)
+- **本项目**：[ClipBridge SSH](https://github.com/starphantom666/-remote-terminal-image-paste)
 - **Remote-SSH 扩展**：[VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
 
 ---

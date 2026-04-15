@@ -1,4 +1,4 @@
-# Remote Terminal Image Paste - VS Code Extension
+# ClipBridge SSH - VS Code Extension
 
 > An improved version based on [Claudeboard](https://github.com/dkodr/claudeboard)
 

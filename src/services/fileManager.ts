@@ -50,7 +50,7 @@ class ManagedImageFile implements ImageFile {
 }
 
 export class WorkspaceFileManager implements FileManagerService {
-    private readonly imageDirPath = '.remote_terminal_images';
+    private readonly imageDirPath = '.clipbridge-images';
     private readonly gitignoreContent = '*\n';
 
     private cachedWorkspaceFolder: vscode.WorkspaceFolder | null = null;
